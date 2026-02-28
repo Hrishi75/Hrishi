@@ -1,139 +1,116 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
+
+const TRAIL_COUNT = 8;
 
 export default function CursorTrail() {
-  const trailsRef = useRef<HTMLDivElement[]>([]);
-  const mousePos = useRef({ x: 0, y: 0 });
   const cursorRef = useRef<HTMLDivElement>(null);
+  const trailRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const mouse = useRef({ x: -100, y: -100 });
 
   useEffect(() => {
-    // Create main cursor
-    const mainCursor = document.createElement("div");
-    mainCursor.className = "main-cursor";
-    document.body.appendChild(mainCursor);
-    cursorRef.current = mainCursor;
+    const positions = Array.from({ length: TRAIL_COUNT }, () => ({
+      x: -100,
+      y: -100,
+    }));
 
-    // Create trail dots
-    const trails: HTMLDivElement[] = [];
-    for (let i = 0; i < 8; i++) {
-      const dot = document.createElement("div");
-      dot.className = "cursor-trail";
-      dot.style.zIndex = String(9999 - i);
-      document.body.appendChild(dot);
-      trails.push(dot);
-    }
-    trailsRef.current = trails;
+    const onMove = (e: MouseEvent) => {
+      mouse.current = { x: e.clientX, y: e.clientY };
+    };
 
-    // Track mouse position
-    const handleMouseMove = (e: MouseEvent) => {
-      mousePos.current = { x: e.clientX, y: e.clientY };
-
-      // Update main cursor immediately
-      gsap.to(mainCursor, {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 0.15,
-        ease: "power2.out",
+    const onLeave = () => {
+      if (cursorRef.current) cursorRef.current.style.opacity = "0";
+      trailRefs.current.forEach((el) => {
+        if (el) el.style.opacity = "0";
       });
     };
 
-    // Handle hover effects
-    const handleMouseEnter = () => {
-      gsap.to(mainCursor, {
-        scale: 1.5,
-        duration: 0.3,
-        ease: "power2.out",
-      });
+    const onEnter = () => {
+      if (cursorRef.current) cursorRef.current.style.opacity = "1";
     };
 
-    const handleMouseLeave = () => {
-      gsap.to(mainCursor, {
-        scale: 1,
-        duration: 0.3,
-        ease: "power2.out",
-      });
+    // Hover scale on interactive elements
+    const scaleUp = () => {
+      if (cursorRef.current)
+        cursorRef.current.style.transform =
+          "translate(-50%, -50%) scale(1.5)";
+    };
+    const scaleDown = () => {
+      if (cursorRef.current)
+        cursorRef.current.style.transform =
+          "translate(-50%, -50%) scale(1)";
     };
 
-    // Add hover listeners to interactive elements
-    const interactiveElements = document.querySelectorAll(
-      'a, button, .skill-card, .project-item, .contact-link'
+    const interactives = document.querySelectorAll(
+      "a, button, .skill-card, .project-item, .contact-link"
     );
-
-    interactiveElements.forEach((el) => {
-      el.addEventListener("mouseenter", handleMouseEnter);
-      el.addEventListener("mouseleave", handleMouseLeave);
+    interactives.forEach((el) => {
+      el.addEventListener("mouseenter", scaleUp);
+      el.addEventListener("mouseleave", scaleDown);
     });
 
-    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mousemove", onMove);
+    document.addEventListener("mouseleave", onLeave);
+    document.addEventListener("mouseenter", onEnter);
 
-    // Animate trails with GSAP
-    let animationId: number;
-    const animateTrails = () => {
-      let x = mousePos.current.x;
-      let y = mousePos.current.y;
+    let rafId: number;
 
-      trails.forEach((trail, i) => {
-        const delay = (i + 1) * 0.03;
-        
-        gsap.to(trail, {
-          x: x,
-          y: y,
-          duration: 0.5 + i * 0.1,
-          ease: "power2.out",
-          overwrite: true,
-        });
+    const animate = () => {
+      if (cursorRef.current) {
+        cursorRef.current.style.left = `${mouse.current.x}px`;
+        cursorRef.current.style.top = `${mouse.current.y}px`;
+      }
 
-        // Update opacity and scale
-        const opacity = 0.7 - i * 0.08;
-        const scale = 1 - i * 0.1;
-        
-        gsap.to(trail, {
-          opacity: opacity,
-          scale: scale,
-          duration: 0.3,
-        });
+      positions.forEach((pos, i) => {
+        const target = i === 0 ? mouse.current : positions[i - 1];
+        const ease = 0.25 - i * 0.018;
+        pos.x += (target.x - pos.x) * ease;
+        pos.y += (target.y - pos.y) * ease;
+
+        const el = trailRefs.current[i];
+        if (el) {
+          el.style.left = `${pos.x}px`;
+          el.style.top = `${pos.y}px`;
+          el.style.opacity = String(0.7 - i * 0.08);
+          el.style.transform = `translate(-50%, -50%) scale(${1 - i * 0.1})`;
+        }
       });
 
-      animationId = requestAnimationFrame(animateTrails);
-    };
-    animateTrails();
-
-    // Hide cursor when leaving window
-    const handleMouseLeaveWindow = () => {
-      gsap.to([mainCursor, ...trails], {
-        opacity: 0,
-        duration: 0.3,
-      });
+      rafId = requestAnimationFrame(animate);
     };
 
-    const handleMouseEnterWindow = () => {
-      gsap.to([mainCursor, ...trails], {
-        opacity: 1,
-        duration: 0.3,
-      });
-    };
+    rafId = requestAnimationFrame(animate);
 
-    document.addEventListener("mouseleave", handleMouseLeaveWindow);
-    document.addEventListener("mouseenter", handleMouseEnterWindow);
-
-    // Cleanup
     return () => {
-      document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseleave", handleMouseLeaveWindow);
-      document.removeEventListener("mouseenter", handleMouseEnterWindow);
-      cancelAnimationFrame(animationId);
-      
-      interactiveElements.forEach((el) => {
-        el.removeEventListener("mouseenter", handleMouseEnter);
-        el.removeEventListener("mouseleave", handleMouseLeave);
+      document.removeEventListener("mousemove", onMove);
+      document.removeEventListener("mouseleave", onLeave);
+      document.removeEventListener("mouseenter", onEnter);
+      cancelAnimationFrame(rafId);
+      interactives.forEach((el) => {
+        el.removeEventListener("mouseenter", scaleUp);
+        el.removeEventListener("mouseleave", scaleDown);
       });
-
-      mainCursor.remove();
-      trails.forEach((trail) => trail.remove());
     };
   }, []);
 
-  return null;
+  return (
+    <>
+      <div
+        ref={cursorRef}
+        className="main-cursor"
+        style={{ transform: "translate(-50%, -50%)" }}
+      />
+      {Array.from({ length: TRAIL_COUNT }).map((_, i) => (
+        <div
+          key={i}
+          ref={(el) => {
+            trailRefs.current[i] = el;
+          }}
+          className="cursor-trail"
+          style={{ zIndex: 99998 - i }}
+        />
+      ))}
+    </>
+  );
 }

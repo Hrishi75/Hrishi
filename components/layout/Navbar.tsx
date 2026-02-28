@@ -2,48 +2,28 @@
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
-import { gsap } from "gsap";
+import { gsap } from "@/lib/gsap";
 import { slashNav } from "@/lib/utils";
 
 export default function Navbar() {
   const navRef = useRef<HTMLDivElement>(null);
   const itemsRef = useRef<HTMLLIElement[]>([]);
   const hoverBgRef = useRef<HTMLDivElement>(null);
+  const navLinksWrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!navRef.current) return;
 
-    // Initial animation on load
     gsap.fromTo(
       navRef.current,
-      { 
-        y: -100, 
-        opacity: 0 
-      },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        delay: 2.8,
-        ease: "power3.out",
-      }
+      { y: -100, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1, delay: 2.8, ease: "power3.out" }
     );
 
-    // Stagger animation for nav items
     gsap.fromTo(
       itemsRef.current,
-      { 
-        y: -20, 
-        opacity: 0 
-      },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.6,
-        stagger: 0.1,
-        delay: 3.1,
-        ease: "power2.out",
-      }
+      { y: -20, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, delay: 3.1, ease: "power2.out" }
     );
   }, []);
 
@@ -52,24 +32,21 @@ export default function Navbar() {
     const icon = target.querySelector(".nav-icon");
     const text = target.querySelector(".nav-text");
     const hoverBg = hoverBgRef.current;
+    const wrapper = navLinksWrapperRef.current;
 
-    if (!hoverBg) return;
+    if (!hoverBg || !wrapper) return;
 
-    // Move hover background
     const rect = target.getBoundingClientRect();
-    const navLinksRect = target.parentElement?.getBoundingClientRect();
-    
-    if (navLinksRect) {
-      gsap.to(hoverBg, {
-        left: rect.left - navLinksRect.left,
-        width: rect.width,
-        opacity: 1,
-        duration: 0.4,
-        ease: "power2.out",
-      });
-    }
+    const wrapperRect = wrapper.getBoundingClientRect();
 
-    // Animate icon with bounce and rotation
+    gsap.to(hoverBg, {
+      left: rect.left - wrapperRect.left,
+      width: rect.width,
+      opacity: 1,
+      duration: 0.4,
+      ease: "power2.out",
+    });
+
     gsap.to(icon, {
       y: -8,
       scale: 1.2,
@@ -78,16 +55,12 @@ export default function Navbar() {
       ease: "back.out(2)",
     });
 
-    // Glow effect on text
     gsap.to(text, {
       color: "var(--gold)",
       duration: 0.3,
     });
 
-    // Create particle burst effect
     createParticles(target);
-
-    // Ripple effect
     createRipple(target);
   };
 
@@ -96,7 +69,6 @@ export default function Navbar() {
     const icon = target.querySelector(".nav-icon");
     const text = target.querySelector(".nav-text");
 
-    // Reset icon
     gsap.to(icon, {
       y: 0,
       scale: 1,
@@ -105,7 +77,6 @@ export default function Navbar() {
       ease: "power2.inOut",
     });
 
-    // Reset text
     gsap.to(text, {
       color: "rgba(245, 240, 232, 0.5)",
       duration: 0.3,
@@ -137,8 +108,8 @@ export default function Navbar() {
       const y = Math.sin(angle) * distance;
 
       gsap.to(particle, {
-        x: x,
-        y: y,
+        x,
+        y,
         opacity: 0,
         scale: 0,
         duration: 0.6 + Math.random() * 0.3,
@@ -158,11 +129,7 @@ export default function Navbar() {
 
     gsap.fromTo(
       ripple,
-      {
-        width: 0,
-        height: 0,
-        opacity: 0.6,
-      },
+      { width: 0, height: 0, opacity: 0.6 },
       {
         width: 100,
         height: 100,
@@ -180,67 +147,77 @@ export default function Navbar() {
     }
   };
 
-  return (
-    <nav ref={navRef} className="main-nav">
-      <div className="nav-logo">
-        <span className="kanji">降胔</span>
-        <span>PORTFOLIO</span>
-      </div>
+  const navItems = [
+    { href: "#about", icon: "武", text: "About" },
+    { href: "#skills", icon: "技", text: "Skills" },
+    { href: "#projects", icon: "刃", text: "Projects" },
+    { href: "#blogs", icon: "筆", text: "Blogs" },
+    { href: "#contact", icon: "道", text: "Contact" },
+  ];
 
-      <ul className="nav-links" onMouseLeave={handleNavMouseLeave}>
-        <div ref={hoverBgRef} className="nav-hover-bg"></div>
-        
-        <li
-          ref={addToRefs}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
+  return (
+    <nav
+      ref={navRef}
+      className="fixed top-0 left-0 right-0 h-[70px] z-[1000] border-b border-parchment/[0.05] flex items-center justify-center px-[50px] max-[900px]:px-6"
+      style={{
+        background: "linear-gradient(180deg, rgba(10,10,8,0.4) 0%, rgba(10,10,8,0.3) 100%)",
+        backdropFilter: "blur(20px)",
+        boxShadow: "0 4px 20px rgba(0,0,0,0.15)",
+      }}
+    >
+      <Link
+        href="/"
+        className="absolute left-[50px] max-[900px]:left-6 font-display text-2xl font-light tracking-[4px] text-parchment flex items-center gap-3 no-underline shrink-0 transition-all duration-300 hover:scale-105"
+      >
+        <span className="text-crimson text-[28px] transition-all duration-300"
+          style={{ textShadow: "0 0 10px rgba(185,28,28,0.3)" }}
         >
-          <Link href="#about" onClick={(e) => slashNav(e, "#about")}>
-            <span className="nav-icon">武</span>
-            <span className="nav-text">About</span>
-          </Link>
-        </li>
-        <li
-          ref={addToRefs}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
-          <Link href="#skills" onClick={(e) => slashNav(e, "#skills")}>
-            <span className="nav-icon">技</span>
-            <span className="nav-text">Skills</span>
-          </Link>
-        </li>
-        <li
-          ref={addToRefs}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
-          <Link href="#projects" onClick={(e) => slashNav(e, "#projects")}>
-            <span className="nav-icon">刃</span>
-            <span className="nav-text">Projects</span>
-          </Link>
-        </li>
-        <li
-          ref={addToRefs}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
-          <Link href="#architecture" onClick={(e) => slashNav(e, "#architecture")}>
-            <span className="nav-icon">構</span>
-            <span className="nav-text">Architecture</span>
-          </Link>
-        </li>
-        <li
-          ref={addToRefs}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
-          <Link href="#contact" onClick={(e) => slashNav(e, "#contact")}>
-            <span className="nav-icon">道</span>
-            <span className="nav-text">Contact</span>
-          </Link>
-        </li>
-      </ul>
+          降胔
+        </span>
+        <span className="max-[900px]:hidden">Hrishikesh</span>
+      </Link>
+
+      <div
+        ref={navLinksWrapperRef}
+        className="relative flex items-center h-full"
+        onMouseLeave={handleNavMouseLeave}
+      >
+        <div
+          ref={hoverBgRef}
+          className="absolute h-[50px] top-1/2 -translate-y-1/2 rounded-[30px] opacity-0 pointer-events-none z-0"
+          style={{
+            background: "linear-gradient(135deg, rgba(185,28,28,0.15) 0%, rgba(201,168,76,0.1) 100%)",
+            boxShadow: "0 0 30px rgba(185,28,28,0.3)",
+            left: 0,
+            width: 0,
+          }}
+        />
+
+        <ul className="flex gap-2 list-none m-0 p-0 relative z-[1] max-[900px]:gap-1 max-[600px]:gap-0.5">
+          {navItems.map((item) => (
+            <li
+              key={item.href}
+              ref={addToRefs}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+              className="relative nav-li"
+            >
+              <Link
+                href={item.href}
+                onClick={(e) => slashNav(e, item.href)}
+                className="flex flex-col items-center px-5 py-3 rounded-[25px] no-underline gap-1 max-[900px]:px-4 max-[900px]:py-2.5 max-[600px]:px-3 max-[600px]:py-2.5"
+              >
+                <span className="nav-icon font-display text-xl text-parchment opacity-50 transition-all duration-500 max-[900px]:text-lg max-[600px]:text-xl">
+                  {item.icon}
+                </span>
+                <span className="nav-text text-[10px] tracking-[2px] uppercase text-parchment/50 transition-all duration-300 max-[900px]:text-[9px] max-[600px]:hidden">
+                  {item.text}
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </nav>
   );
 }

@@ -58,24 +58,41 @@ export const PROJECTS = [
   },
 ];
 
-export const FILE_STRUCTURE = [
-  { name: "samurai-portfolio/", type: "folder", depth: 0 },
-  { name: "src/", type: "folder", depth: 1 },
-  { name: "app/", type: "folder", depth: 2 },
-  { name: "layout.tsx", type: "tsx", depth: 3, comment: "Root layout + fonts" },
-  { name: "page.tsx", type: "tsx", depth: 3, comment: "Home page" },
-  // ... add rest of structure from HTML
-];
-
-export const TECH_STACK = [
+export const BLOG_POSTS = [
   {
-    icon: "⛩️",
-    title: "Framework",
-    items: [
-      { name: "Next.js 14", type: "tsx", comment: "App Router + RSC" },
-      { name: "TypeScript 5.3", type: "ts", comment: "Strict mode" },
-      { name: "Tailwind CSS 3.4", type: "css", comment: "JIT + custom plugins" },
-    ],
+    title: "The Way of Clean Architecture",
+    excerpt:
+      "How samurai discipline applies to structuring scalable codebases. Exploring layered architecture, separation of concerns, and the art of modular design.",
+    date: "2025-01-15",
+    readTime: "5 min",
+    tags: ["Architecture", "React"],
+    link: "#",
   },
-  // ... add rest of tech stack
+  {
+    title: "Forging Components with Framer Motion",
+    excerpt:
+      "A deep dive into building fluid, production-ready animations in React. From simple fades to orchestrated scroll-driven sequences.",
+    date: "2025-02-08",
+    readTime: "7 min",
+    tags: ["Animation", "Framer Motion"],
+    link: "#",
+  },
+  {
+    title: "The Zen of TypeScript Generics",
+    excerpt:
+      "Mastering generics to write truly reusable code. Practical patterns for utility types, conditional types, and inference that scale.",
+    date: "2025-03-22",
+    readTime: "6 min",
+    tags: ["TypeScript", "Patterns"],
+    link: "#",
+  },
+  {
+    title: "Server Components: The Silent Revolution",
+    excerpt:
+      "How React Server Components change the way we think about data fetching, bundle size, and the boundary between client and server.",
+    date: "2025-04-10",
+    readTime: "8 min",
+    tags: ["Next.js", "RSC"],
+    link: "#",
+  },
 ];

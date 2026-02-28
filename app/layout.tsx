@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Zen_Kaku_Gothic_New, Fira_Code } from "next/font/google";
 import "./globals.css";
+import BackgroundImage from "@/components/effects/BackgroundImage";
 import GrainOverlay from "@/components/effects/GrainOverlay";
 import CursorTrail from "@/components/effects/CursorTrail";
 
@@ -24,11 +25,11 @@ const firaCode = Fira_Code({
 });
 
 export const metadata: Metadata = {
-  title: "降胔 — Samurai Portfolio",
-  description: "Full-Stack Developer & Designer. Discipline in craft. Precision in execution.",
+  title: "降胔 — Hrishikesh Borkar",
+  description: "Full-Stack Developer, Data & Devops",
   openGraph: {
-    title: "降胔 — Samurai Portfolio",
-    description: "Full-Stack Developer & Designer",
+    title: "降胔 — Hrishikesh Borkar",
+    description: "Full-Stack Developer, Data Development & Devops",
     images: ["/og-image.png"],
   },
 };
@@ -41,6 +42,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${cormorant.variable} ${zenKaku.variable} ${firaCode.variable}`}>
       <body>
+        <BackgroundImage />
         <GrainOverlay />
         <CursorTrail />
         {children}

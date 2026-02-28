@@ -9,13 +9,13 @@ export const SKILLS = [
     icon: "⚡",
     name: "Backend",
     description: "Designing robust APIs and microservices that scale under pressure and handle the heat of production.",
-    tags: ["Node.js", "Python", "Go", "GraphQL", "REST"],
+    tags: ["Node.js", "REST", "Express"],
   },
   {
     icon: "🗄️",
     name: "Database",
     description: "Architecting data layers that are fast, reliable, and designed for the long haul.",
-    tags: ["PostgreSQL", "MongoDB", "Redis", "Prisma"],
+    tags: ["MongoDB", "Redis", "Supabase"],
   },
   {
     icon: "☁️",
@@ -27,7 +27,7 @@ export const SKILLS = [
     icon: "🎨",
     name: "Design",
     description: "Translating ideas into visuals that feel intentional, cohesive, and unforgettable.",
-    tags: ["Figma", "After Effects", "Blender", "GSAP"],
+    tags: ["Figma", "GSAP"],
   },
   {
     icon: "🧠",
@@ -39,22 +39,22 @@ export const SKILLS = [
 
 export const PROJECTS = [
   {
-    title: "ShogunCMS",
-    description: "A headless content management system with real-time collaboration, optimized for speed and developer experience. Handles 10k+ concurrent users.",
-    tech: ["Next.js", "TypeScript", "Prisma", "WebSocket"],
-    link: "#",
+    title: "Defimart",
+    description: "A social marketplace with a feed for sharing and trading merchandise from blockchain conferences and community events.",
+    tech: ["Next.js", "TypeScript", "Supabase", "Escrow"],
+    link: "https://defimart.vercel.app/",
   },
   {
-    title: "KatanaUI",
-    description: "An open-source component library with 50+ accessible, animated components. Inspired by Japanese minimalism and built for production.",
-    tech: ["React", "Storybook", "Radix UI", "CSS Modules"],
-    link: "#",
+    title: "Netflix-Clone-Devsecops-Project",
+    description: "Built a secure CI/CD pipeline using Jenkins to deploy a Dockerized Netflix Clone application on a Kubernetes cluster",
+    tech: ["Docker", "Kubernetes", "jenkins", "SonarQube", "Trivy", "Helm", "ArgoCD", "Prometheus", "Grafana"],
+    link: "https://github.com/Hrishi75/Netflix-Clone-Devsecops-Project",
   },
   {
-    title: "RoninAnalytics",
-    description: "Real-time analytics dashboard with custom WebGL visualizations, anomaly detection, and automated reporting for SaaS products.",
-    tech: ["D3.js", "Go", "ClickHouse", "gRPC"],
-    link: "#",
+    title: "JWT-auth",
+    description: "A ready-to-use JWT authentication API built with Express, TypeScript, and MongoDB. This API provides secure user authentication with password hashing and essential security measures.",
+    tech: ["Typescript"],
+    link: "https://github.com/Hrishi75/JWT-auth-master",
   },
 ];
 

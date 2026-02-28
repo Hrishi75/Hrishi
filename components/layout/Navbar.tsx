@@ -158,7 +158,7 @@ export default function Navbar() {
   return (
     <nav
       ref={navRef}
-      className="fixed top-0 left-0 right-0 h-[70px] z-[1000] border-b border-parchment/[0.05] flex items-center justify-center px-[50px] max-[900px]:px-6"
+      className="fixed top-0 left-0 right-0 h-17.5 z-1000 border-b border-parchment/5 flex items-center justify-center px-12.5 max-[900px]:px-6"
       style={{
         background: "linear-gradient(180deg, rgba(10,10,8,0.4) 0%, rgba(10,10,8,0.3) 100%)",
         backdropFilter: "blur(20px)",
@@ -167,7 +167,7 @@ export default function Navbar() {
     >
       <Link
         href="/"
-        className="absolute left-[50px] max-[900px]:left-6 font-display text-2xl font-light tracking-[4px] text-parchment flex items-center gap-3 no-underline shrink-0 transition-all duration-300 hover:scale-105"
+        className="absolute left-12.5 max-[900px]:left-6 font-display text-2xl font-light tracking-[4px] text-parchment flex items-center gap-3 no-underline shrink-0 transition-all duration-300 hover:scale-105"
       >
         <span className="text-crimson text-[28px] transition-all duration-300"
           style={{ textShadow: "0 0 10px rgba(185,28,28,0.3)" }}
@@ -184,7 +184,7 @@ export default function Navbar() {
       >
         <div
           ref={hoverBgRef}
-          className="absolute h-[50px] top-1/2 -translate-y-1/2 rounded-[30px] opacity-0 pointer-events-none z-0"
+          className="absolute h-12.5 top-1/2 -translate-y-1/2 rounded-[30px] opacity-0 pointer-events-none z-0"
           style={{
             background: "linear-gradient(135deg, rgba(185,28,28,0.15) 0%, rgba(201,168,76,0.1) 100%)",
             boxShadow: "0 0 30px rgba(185,28,28,0.3)",
@@ -193,7 +193,7 @@ export default function Navbar() {
           }}
         />
 
-        <ul className="flex gap-2 list-none m-0 p-0 relative z-[1] max-[900px]:gap-1 max-[600px]:gap-0.5">
+        <ul className="flex gap-2 list-none m-0 p-0 relative z-1 max-[900px]:gap-1 max-[600px]:gap-0.5">
           {navItems.map((item) => (
             <li
               key={item.href}

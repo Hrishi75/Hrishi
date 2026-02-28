@@ -99,16 +99,16 @@ export default function Hero() {
           {...fadeUp(2.8)}
           className="text-[11px] tracking-[6px] uppercase text-gold-dim mb-5"
         >
-          Full-Stack Developer, Data Development &amp; Devops.
+          DevSecOps, Full-Stack Developer, Data Development &amp; Devops.
         </motion.div>
 
         <motion.h1
           {...fadeUp(3.0)}
           className="font-display text-[clamp(52px,7vw,96px)] font-light leading-[1.05] mb-6"
         >
-          The Way of<br />
+          Engineering  with
           <span className="text-crimson italic relative">
-            Clean Code
+             Precision
             <motion.span
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
@@ -122,8 +122,8 @@ export default function Hero() {
           {...fadeUp(3.3)}
           className="text-base leading-[1.8] text-parchment/[0.45] font-light max-w-[480px]"
         >
-          Discipline in craft. Precision in execution. Building digital experiences
-          with the focus and dedication of a samurai walking the path.
+          Enterprise reliability. Web3 innovation. DevSecOps mindset.
+Crafting scalable digital experiences while mastering the infrastructure beneath the
         </motion.p>
 
         <motion.a

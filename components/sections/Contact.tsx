@@ -5,10 +5,10 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 import SectionHeader from "@/components/ui/SectionHeader";
 
 const CONTACT_LINKS = [
-  { label: "✉ Email", href: "mailto:hello@samurai.dev" },
-  { label: "🐙 GitHub", href: "#" },
-  { label: "💼 LinkedIn", href: "#" },
-  { label: "𝕏 Twitter", href: "#" },
+  { label: "✉ Email", href: "mailto:hrishikeshborkar94@gmail.com" },
+  { label: "🐙 GitHub", href: "https://github.com/Hrishi75" },
+  { label: "💼 LinkedIn", href: "https://www.linkedin.com/in/hrishikesh-borkar-61726b210/" },
+  { label: "𝕏 Twitter", href: "https://x.com/HrishiC7" },
 ];
 
 export default function Contact() {

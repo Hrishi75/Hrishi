@@ -5,10 +5,10 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 import SectionHeader from "@/components/ui/SectionHeader";
 
 const DETAILS = [
-  { label: "Location", value: "San Francisco, CA" },
-  { label: "Experience", value: "5+ Years" },
-  { label: "Specialty", value: "React & Node.js" },
-  { label: "Education", value: "CS, Stanford" },
+  { label: "Location", value: "Nagpur, India" },
+  { label: "Experience", value: "2+ Years" },
+  { label: "Specialty", value: "React, Node.js, Web3 & Typescript" },
+  { label: "Education", value: "CS, BITS" },
 ];
 
 export default function About() {
@@ -85,15 +85,14 @@ export default function About() {
               A developer who walks <span className="text-crimson">the path</span>
             </h3>
             <p className="text-[14.5px] leading-8 text-parchment/[0.55] font-light mb-4">
-              I am a full-stack developer with a passion for crafting elegant, performant
-              digital experiences. Like a samurai hones their blade, I sharpen my skills
-              daily — writing clean code, designing intuitive interfaces, and pushing the
-              boundaries of what is possible on the web.
+              I’m a Full-Stack Developer and DevSecOps enthusiast with a strong foundation in enterprise infrastructure.<br/>
+
+Currently working as an Analyst at HCLTech, I support VMware virtualization and Windows Server environments, ensuring performance, uptime, and operational excellence across production systems.<br/>
+
+
             </p>
             <p className="text-[14.5px] leading-8 text-parchment/[0.55] font-light mb-4">
-              My philosophy is simple: discipline in craft, precision in execution, and
-              an unwavering commitment to quality. Every project is a new battle, and I
-              enter each one fully prepared.
+              Outside my core role, I build secure, scalable web and Web3 applications — exploring smart contracts, blockchain integrations, and modern frontend frameworks. Like a samurai honing his blade, I refine my skills daily — mastering automation, cloud, security, and decentralized technologies.
             </p>
             <div className="grid grid-cols-2 gap-4 mt-[30px]">
               {DETAILS.map((detail) => (

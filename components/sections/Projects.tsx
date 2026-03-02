@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import SectionHeader from "@/components/ui/SectionHeader";
@@ -29,17 +30,13 @@ export default function Projects() {
                   className="w-full aspect-[16/10] border border-parchment/[0.06] overflow-hidden relative"
                   style={isEven ? { direction: "ltr" } : undefined}
                 >
-                  <div
-                    className="w-full h-full flex flex-col items-center justify-center text-parchment/[0.15] text-xs tracking-[3px] uppercase"
-                    style={{
-                      background:
-                        "linear-gradient(135deg, var(--smoke) 0%, rgba(42,42,37,0.5) 100%)",
-                    }}
-                  >
-                    <div className="text-[40px] opacity-30">🖼️</div>
-                    <div>Project Screenshot</div>
-                    <div className="text-[9px] opacity-50">16:10 RATIO</div>
-                  </div>
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 900px) 100vw, 60vw"
+                  />
                 </div>
 
                 {/* Project details */}

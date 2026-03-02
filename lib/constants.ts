@@ -43,18 +43,21 @@ export const PROJECTS = [
     description: "A social marketplace with a feed for sharing and trading merchandise from blockchain conferences and community events.",
     tech: ["Next.js", "TypeScript", "Supabase", "Escrow"],
     link: "https://defimart.vercel.app/",
+    image: "/projects/defimart.png",
   },
   {
     title: "Netflix-Clone-Devsecops-Project",
     description: "Built a secure CI/CD pipeline using Jenkins to deploy a Dockerized Netflix Clone application on a Kubernetes cluster",
     tech: ["Docker", "Kubernetes", "jenkins", "SonarQube", "Trivy", "Helm", "ArgoCD", "Prometheus", "Grafana"],
     link: "https://github.com/Hrishi75/Netflix-Clone-Devsecops-Project",
+    image: "/projects/netflix-clone.png",
   },
   {
-    title: "JWT-auth",
-    description: "A ready-to-use JWT authentication API built with Express, TypeScript, and MongoDB. This API provides secure user authentication with password hashing and essential security measures.",
-    tech: ["Typescript"],
-    link: "https://github.com/Hrishi75/JWT-auth-master",
+    title: "Chefify",
+    description: "Built an AI cooking chat app using Google Gemini API that generates detailed recipes with customizable preferences (servings, difficulty, cuisine, diet), multi-language transliteration support, dark/light theme, animated UI effects, and a fully responsive design optimized for mobile and desktop.",
+    tech: ["Next.js", "TypeScript", "Tailwind CSS", "Gemini API"],
+    link: "https://chefify1.vercel.app/",
+    image: "/projects/chefify.png",
   },
 ];
 

@@ -26,18 +26,26 @@ export default function Projects() {
                 style={isEven ? { direction: "rtl" } : undefined}
               >
                 {/* Project image */}
-                <div
-                  className="w-full aspect-[16/10] border border-parchment/[0.06] overflow-hidden relative"
+                <motion.div
+                  className="w-full aspect-[16/10] border border-parchment/[0.06] overflow-hidden relative group cursor-pointer"
                   style={isEven ? { direction: "ltr" } : undefined}
+                  whileHover={{ scale: 1.03, y: -6 }}
+                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                 >
                   <Image
                     src={project.image}
                     alt={project.title}
                     fill
-                    className="object-cover"
+                    className="object-cover transition-all duration-600 ease-out group-hover:scale-110 group-hover:brightness-110"
                     sizes="(max-width: 900px) 100vw, 60vw"
                   />
-                </div>
+                  {/* Crimson overlay on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-crimson/0 to-transparent opacity-0 group-hover:from-crimson/15 group-hover:opacity-100 transition-all duration-500 pointer-events-none" />
+                  {/* Bottom gradient vignette */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                  {/* Glow border */}
+                  <div className="absolute inset-0 border border-crimson/0 group-hover:border-crimson/30 group-hover:shadow-[inset_0_0_30px_rgba(185,28,28,0.08)] transition-all duration-500 pointer-events-none" />
+                </motion.div>
 
                 {/* Project details */}
                 <div style={isEven ? { direction: "ltr" } : undefined}>

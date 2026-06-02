@@ -58,6 +58,7 @@ html, body {
     linear-gradient(160deg, #ff9a6b 0%, #ffb38a 35%, #ffd6b0 66%, #ffeede 100%);
 }
 .wp-graphite { background: linear-gradient(160deg,#565b66 0%,#474c57 40%,#30343d 100%); }
+.wp-photo { background-image: url("/wallpaper.jpg"); }
 
 /* ====== Menu bar ====== */
 #menubar {

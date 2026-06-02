@@ -8,7 +8,7 @@ export function AboutApp() {
   const p = DATA.profile;
   return (
     <div className="win-scroll">
-      <div style={{ height: 96, background: "linear-gradient(120deg,#bcd9ff,#e7d6ff 60%,#ffd9c2)", position: "relative" }} />
+      <div style={{ height: 96, background: "linear-gradient(120deg,#bcd9ff,#e7d6ff 60%,#ffd9c2)" }} />
       <div style={{ padding: "0 36px 36px" }}>
         {/* Avatar overlaps the banner; name sits cleanly below (no overlap). */}
         <div style={{ marginTop: -46, display: "flex" }}>

@@ -228,7 +228,7 @@ a.link:hover { text-decoration: underline; }
 
 /* Desktop clock widget (live) */
 .clock-widget { position: fixed; left: 24px; top: 46px; z-index: 5; padding: 14px 20px 15px;
-  border-radius: 20px; color: #fff; user-select: none; pointer-events: none;
+  border-radius: 20px; color: #fff; user-select: none; pointer-events: auto; cursor: grab;
   background: rgba(255,255,255,0.14);
   backdrop-filter: blur(22px) saturate(1.6); -webkit-backdrop-filter: blur(22px) saturate(1.6);
   border: 0.5px solid rgba(255,255,255,0.32);
@@ -355,3 +355,45 @@ select.twk-field { padding-right: 22px;
 .twk-chip[data-on="1"] { box-shadow: 0 0 0 1.5px rgba(0,0,0,.85), 0 2px 6px rgba(0,0,0,.15); }
 .twk-chip svg { position: absolute; top: 6px; left: 6px; width: 13px; height: 13px;
   filter: drop-shadow(0 1px 1px rgba(0,0,0,.3)); }
+
+/* ====== Spotify — now playing widget (display only) ====== */
+.spotify-widget { position: fixed; left: 24px; bottom: 112px; z-index: 5;
+  display: flex; align-items: center; gap: 13px; width: 282px; padding: 12px 16px 12px 12px;
+  border-radius: 20px; color: #fff; user-select: none; cursor: grab;
+  background:
+    linear-gradient(135deg, rgba(30,215,96,0.22), rgba(30,215,96,0) 46%),
+    rgba(16,16,20,0.42);
+  backdrop-filter: blur(26px) saturate(1.7); -webkit-backdrop-filter: blur(26px) saturate(1.7);
+  border: 0.5px solid rgba(255,255,255,0.22);
+  box-shadow: inset 0 0.5px 0 rgba(255,255,255,0.34), 0 12px 38px rgba(0,0,0,0.34);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.45);
+  animation: clockFade 0.5s ease both; }
+.spw-art-wrap { position: relative; flex-shrink: 0; }
+.spw-art { width: 58px; height: 58px; border-radius: 13px; object-fit: cover; display: block;
+  box-shadow: 0 5px 16px rgba(0,0,0,0.46), inset 0 0 0 0.5px rgba(255,255,255,0.12); background: #2a2a30; }
+.spw-art-empty { display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.5); font-size: 26px; }
+.spw-info { min-width: 0; flex: 1; display: flex; flex-direction: column; gap: 3px; }
+.spw-label { display: flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.88); text-shadow: none; }
+.spw-label svg { flex-shrink: 0; }
+.spw-title { font-size: 14px; font-weight: 600; line-height: 1.25;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.spw-artist { font-size: 12px; color: rgba(255,255,255,0.74);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.spw-eq { display: inline-flex; align-items: flex-end; gap: 2px; height: 11px; margin-left: auto; }
+.spw-eq span { width: 2.5px; background: #1ed760; border-radius: 2px;
+  box-shadow: 0 0 4px rgba(30,215,96,0.6); animation: spw-eq 0.9s ease-in-out infinite; }
+.spw-eq span:nth-child(2) { animation-delay: 0.22s; }
+.spw-eq span:nth-child(3) { animation-delay: 0.45s; }
+.spw-eq span:nth-child(4) { animation-delay: 0.15s; }
+@keyframes spw-eq { 0%,100% { height: 3px; } 50% { height: 11px; } }
+.spw-bar { margin-top: 7px; height: 3px; border-radius: 2px;
+  background: rgba(255,255,255,0.18); overflow: hidden; }
+.spw-bar i { display: block; height: 100%; background: #1ed760; border-radius: 2px;
+  box-shadow: 0 0 6px rgba(30,215,96,0.5); transition: width 1s linear; }
+@media (max-width: 640px) {
+  .spotify-widget { left: 16px; bottom: 98px; width: calc(100vw - 32px); max-width: 282px; }
+}
+/* Dragging state shared by movable widgets */
+.clock-widget.dragging, .spotify-widget.dragging { cursor: grabbing; z-index: 6; animation: none; }

@@ -1,7 +1,8 @@
 "use client";
 
-// Live desktop clock widget (Sonoma-style).
+// Live desktop clock widget (Sonoma-style). Draggable.
 import React from "react";
+import { useDraggable } from "./useDraggable";
 
 const { useState, useEffect } = React;
 
@@ -9,6 +10,7 @@ const FULL_DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Frid
 const FULL_MONS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 export function ClockWidget() {
+  const { ref, style, onMouseDown, dragging } = useDraggable("hb-clock-pos");
   const [now, setNow] = useState<Date | null>(null); // null until mount → no SSR mismatch
   useEffect(() => {
     setNow(new Date());
@@ -21,7 +23,13 @@ export function ClockWidget() {
   const ap = h >= 12 ? "PM" : "AM";
   h = h % 12 || 12;
   return (
-    <div className="clock-widget" aria-label="Current date and time">
+    <div
+      ref={ref}
+      className={"clock-widget" + (dragging ? " dragging" : "")}
+      style={style}
+      onMouseDown={onMouseDown}
+      aria-label="Current date and time"
+    >
       <div className="clock-time">
         {h}:{pad(now.getMinutes())}:{pad(now.getSeconds())}<span className="clock-ap">{ap}</span>
       </div>

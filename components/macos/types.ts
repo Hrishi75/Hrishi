@@ -40,4 +40,5 @@ export interface TweakValues extends Record<string, unknown> {
   wallpaper: string;
   dockGlass: boolean;
   clockWidget: boolean;
+  spotifyWidget: boolean;
 }

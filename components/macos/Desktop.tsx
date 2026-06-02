@@ -7,6 +7,7 @@ import { Glyph, Squircle } from "./icons";
 import { Window } from "./desktop/Window";
 import { MenuBar } from "./desktop/MenuBar";
 import { ClockWidget } from "./desktop/ClockWidget";
+import { SpotifyWidget } from "./desktop/SpotifyWidget";
 import { Dock } from "./desktop/Dock";
 import { APP_REGISTRY } from "./config/appRegistry";
 import { TWEAK_DEFAULTS, WALLS } from "./config/tweakDefaults";
@@ -162,6 +163,7 @@ export default function Desktop() {
       <div id="desktop" className={t.wallpaper} />
 
       {t.clockWidget && <ClockWidget />}
+      {t.spotifyWidget && <SpotifyWidget />}
 
       <MenuBar activeMenu={activeMenu} onOpenTweaks={() => setTweaksOpen((v) => !v)} />
 
@@ -203,6 +205,7 @@ export default function Desktop() {
         />
         <TweakToggle label="Frosted dock" value={t.dockGlass} onChange={(v) => setTweak("dockGlass", v)} />
         <TweakToggle label="Clock widget" value={t.clockWidget} onChange={(v) => setTweak("clockWidget", v)} />
+        <TweakToggle label="Spotify widget" value={t.spotifyWidget} onChange={(v) => setTweak("spotifyWidget", v)} />
       </TweaksPanel>
 
       <div id="boot" className={booted ? "gone" : ""}>
